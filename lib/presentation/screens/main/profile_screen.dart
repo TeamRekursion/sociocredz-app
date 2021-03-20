@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sociocredz/presentation/animations/show_up.dart';
+import 'package:sociocredz/presentation/screens/main/all_trasactions_screen.dart';
 import 'package:sociocredz/presentation/screens/main/qr_screen.dart';
 import 'package:sociocredz/presentation/themes/theme.dart';
 import 'package:sociocredz/presentation/widgets/sociocredz.dart';
@@ -191,7 +192,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: Material(
                           color: Colors.transparent,
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => AllTransactionsScreen(),
+                                ),
+                              );
+                            },
                             child: Container(
                               padding: EdgeInsets.all(8),
                               child: Row(
