@@ -41,10 +41,7 @@ class _ContainerScreenState extends State<ContainerScreen> {
           items: [
             FloatingNavbarItem(icon: Icons.home, title: 'Home'),
             FloatingNavbarItem(icon: Icons.explore, title: 'Explore'),
-            FloatingNavbarItem(
-              icon: Icons.leaderboard,
-              title: 'Leaderboard',
-            ),
+            FloatingNavbarItem(icon: Icons.leaderboard, title: 'Stats'),
             FloatingNavbarItem(icon: Icons.account_circle, title: 'Profile'),
           ],
         ),
