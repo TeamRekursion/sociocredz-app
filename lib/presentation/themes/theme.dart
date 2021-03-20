@@ -4,6 +4,7 @@ const red = Color(0xFFFC257E);
 const purple = Color(0xFFA41BE4);
 const orange = Color(0xFFFC7B22);
 const darkBlue = Color(0xFF4E1569);
+const grey = Color(0xFFE7E7E7);
 
 final radius4 = BorderRadius.circular(4);
 final radius12 = BorderRadius.circular(12);

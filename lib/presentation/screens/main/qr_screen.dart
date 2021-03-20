@@ -35,7 +35,7 @@ class QRScreen extends StatelessWidget {
         delay: Duration(milliseconds: 300),
         child: Column(
           children: [
-            SizedBox(height: 16),
+            SizedBox(height: 32),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 32),
               padding: EdgeInsets.all(32),

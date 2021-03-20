@@ -4,6 +4,7 @@ import 'package:sociocredz/presentation/animations/show_up.dart';
 import 'package:sociocredz/presentation/screens/main/qr_screen.dart';
 import 'package:sociocredz/presentation/themes/theme.dart';
 import 'package:sociocredz/presentation/widgets/sociocredz.dart';
+import 'package:sociocredz/presentation/widgets/transaction.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -92,47 +93,45 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         borderRadius: radius12,
                       ),
                     ),
-                    Expanded(
-                      child: Container(
-                        margin:
-                            EdgeInsets.symmetric(vertical: 16, horizontal: 32),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.account_balance_wallet,
+                    Container(
+                      margin:
+                          EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.account_balance_wallet,
+                                color: Colors.white,
+                              ),
+                              SizedBox(width: 6),
+                              Text(
+                                "Current Wallet Balance",
+                                style: TextStyle(
                                   color: Colors.white,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 16,
                                 ),
-                                SizedBox(width: 6),
-                                Text(
-                                  "Current Wallet Balance",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 16,
-                                  ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                "69.0",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 50,
                                 ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  "69.0",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 50,
-                                  ),
-                                ),
-                                SizedBox(width: 8),
-                                SocioCredz(21),
-                              ],
-                            ),
-                          ],
-                        ),
+                              ),
+                              SizedBox(width: 8),
+                              SocioCredz(21),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                   ],
@@ -142,6 +141,84 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   borderRadius: radius12,
                 ),
               ),
+              SizedBox(height: 24),
+              Card(
+                margin: EdgeInsets.symmetric(horizontal: 16),
+                elevation: 4,
+                shape: RoundedRectangleBorder(
+                  borderRadius: radius12,
+                ),
+                child: Container(
+                  margin: EdgeInsets.all(24),
+                  color: Colors.white,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(Icons.swap_horiz, color: orange, size: 32),
+                          SizedBox(width: 8),
+                          Text(
+                            "Recent Transactions",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 32),
+                      ListView.builder(
+                        itemCount: 3,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) => Column(
+                          children: [
+                            Transaction(
+                              title: "CK Store",
+                              description: "City Centre Mall",
+                              isExpense: false,
+                              amount: 200,
+                            ),
+                            SizedBox(height: 4),
+                            Divider(thickness: 1.5),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 32),
+                      Container(
+                        alignment: Alignment.center,
+                        child: Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            onTap: () {},
+                            child: Container(
+                              padding: EdgeInsets.all(8),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "View All Transactions",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  SizedBox(width: 4),
+                                  Icon(Icons.navigate_next, color: orange)
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 16),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(height: 32),
             ],
           ),
         ),

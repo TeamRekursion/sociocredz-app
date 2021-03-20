@@ -26,24 +26,27 @@ class _ContainerScreenState extends State<ContainerScreen> {
       bottomNavigationBar: Material(
         color: Colors.transparent,
         elevation: 70,
-        child: FloatingNavbar(
-          onTap: (int val) {
-            setState(() {
-              _selectedIndex = val;
-            });
-          },
-          backgroundColor: Colors.white,
-          margin: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-          currentIndex: _selectedIndex,
-          unselectedItemColor: Colors.black,
-          selectedItemColor: red,
-          iconSize: 28,
-          items: [
-            FloatingNavbarItem(icon: Icons.home, title: 'Home'),
-            FloatingNavbarItem(icon: Icons.explore, title: 'Explore'),
-            FloatingNavbarItem(icon: Icons.leaderboard, title: 'Stats'),
-            FloatingNavbarItem(icon: Icons.account_circle, title: 'Profile'),
-          ],
+        child: Container(
+          padding: EdgeInsets.only(bottom: 16),
+          child: FloatingNavbar(
+            onTap: (int val) {
+              setState(() {
+                _selectedIndex = val;
+              });
+            },
+            backgroundColor: Colors.white,
+            margin: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+            currentIndex: _selectedIndex,
+            unselectedItemColor: Colors.black,
+            selectedItemColor: red,
+            iconSize: 28,
+            items: [
+              FloatingNavbarItem(icon: Icons.home, title: 'Home'),
+              FloatingNavbarItem(icon: Icons.explore, title: 'Explore'),
+              FloatingNavbarItem(icon: Icons.leaderboard, title: 'Stats'),
+              FloatingNavbarItem(icon: Icons.account_circle, title: 'Profile'),
+            ],
+          ),
         ),
       ),
     );
