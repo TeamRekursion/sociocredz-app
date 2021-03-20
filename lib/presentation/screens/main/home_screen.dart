@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:sociocredz/presentation/animations/show_up.dart';
 import 'package:sociocredz/presentation/themes/theme.dart';
+import 'package:sociocredz/presentation/widgets/campaign_card.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -27,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   options: CarouselOptions(
                     height: 125,
                     viewportFraction: 1,
+                    autoPlay: true,
                     onPageChanged: (index, _) {
                       setState(() {
                         _adIndex = index;
@@ -67,6 +69,46 @@ class _HomeScreenState extends State<HomeScreen> {
                     dotHeight: 8,
                     dotWidth: 8,
                   ),
+                ),
+              ),
+              Container(
+                alignment: Alignment.centerLeft,
+                margin: EdgeInsets.all(16),
+                child: Text(
+                  "Trending Campaigns",
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 8),
+                child: CarouselSlider(
+                  options: CarouselOptions(
+                    viewportFraction: 0.8,
+                    enlargeCenterPage: true,
+                  ),
+                  items: [
+                    CampaignCard(
+                      title: "NGO Anokha",
+                      tagline: "#foodforeveryone",
+                      pledgedGoal: 97000,
+                      raisedCredits: 69420,
+                    ),
+                    CampaignCard(
+                      title: "NGO Udaan",
+                      tagline: "#clothes",
+                      pledgedGoal: 10000,
+                      raisedCredits: 3322,
+                    ),
+                    CampaignCard(
+                      title: "NGO Awaaz",
+                      tagline: "#cleanwater",
+                      pledgedGoal: 16000,
+                      raisedCredits: 15300,
+                    ),
+                  ],
                 ),
               ),
             ],
