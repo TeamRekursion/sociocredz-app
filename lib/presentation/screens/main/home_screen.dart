@@ -105,26 +105,17 @@ class _HomeScreenState extends State<HomeScreen> {
                           enlargeCenterPage: true,
                           height: 255,
                         ),
-                        items: [
-                          CampaignCard(
-                            title: "NGO Anokha",
-                            tagline: "#foodforeveryone",
-                            pledgedGoal: 97000,
-                            raisedCredits: 69420,
-                          ),
-                          CampaignCard(
-                            title: "NGO Udaan",
-                            tagline: "#clothes",
-                            pledgedGoal: 10000,
-                            raisedCredits: 3322,
-                          ),
-                          CampaignCard(
-                            title: "NGO Awaaz",
-                            tagline: "#cleanwater",
-                            pledgedGoal: 16000,
-                            raisedCredits: 15300,
-                          ),
-                        ],
+                        items:
+                            List.generate(snapshot.data.data.length, (index) {
+                          return CampaignCard(
+                            title: snapshot.data.data[index].ngoName,
+                            tagline: snapshot.data.data[index].tagline,
+                            pledgedGoal:
+                                snapshot.data.data[index].moneyRequired,
+                            raisedCredits:
+                                snapshot.data.data[index].raisedAmount,
+                          );
+                        }),
                       ),
                     );
                   } else if (snapshot.hasError) {
