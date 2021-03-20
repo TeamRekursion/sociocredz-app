@@ -6,6 +6,7 @@ import 'package:sociocredz/data/model/campaign_response.dart';
 import 'package:sociocredz/data/repos/home_repo.dart';
 import 'package:sociocredz/presentation/animations/show_up.dart';
 import 'package:sociocredz/presentation/themes/theme.dart';
+import 'package:sociocredz/presentation/widgets/buy_dialog.dart';
 import 'package:sociocredz/presentation/widgets/campaign_card.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -144,93 +145,156 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: EdgeInsets.symmetric(horizontal: 8),
                 physics: NeverScrollableScrollPhysics(),
                 children: [
-                  Container(
-                    margin: EdgeInsets.all(24),
-                    height: 30,
-                    width: 30,
-                    child: Card(
-                      elevation: 3,
-                      child: Container(
-                        margin: EdgeInsets.all(12),
-                        child: SvgPicture.asset("assets/images/PlantTree.svg"),
+                  InkWell(
+                    onTap: () => showDialog(
+                      context: context,
+                      builder: (context) => BuyDialog(
+                        cost: 20,
+                        desc: "Plant a Tree",
+                        image: "assets/images/PlantTree.svg",
                       ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: radius12,
+                    ),
+                    child: Container(
+                      margin: EdgeInsets.all(24),
+                      height: 30,
+                      width: 30,
+                      child: Card(
+                        elevation: 3,
+                        child: Container(
+                          margin: EdgeInsets.all(12),
+                          child:
+                              SvgPicture.asset("assets/images/PlantTree.svg"),
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: radius12,
+                        ),
                       ),
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.all(24),
-                    height: 30,
-                    width: 30,
-                    child: Card(
-                      elevation: 3,
-                      child: Container(
-                        margin: EdgeInsets.all(12),
-                        child: SvgPicture.asset("assets/images/BuyMeal.svg"),
+                  InkWell(
+                    onTap: () => showDialog(
+                      context: context,
+                      builder: (context) => BuyDialog(
+                        cost: 50,
+                        desc: "Buy a Meal",
+                        image: "assets/images/BuyMeal.svg",
                       ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: radius12,
+                    ),
+                    child: Container(
+                      margin: EdgeInsets.all(24),
+                      height: 30,
+                      width: 30,
+                      child: Card(
+                        elevation: 3,
+                        child: Container(
+                          margin: EdgeInsets.all(12),
+                          child: SvgPicture.asset("assets/images/BuyMeal.svg"),
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: radius12,
+                        ),
                       ),
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.all(24),
-                    height: 30,
-                    width: 30,
-                    child: Card(
-                      elevation: 3,
-                      child: Container(
-                        margin: EdgeInsets.all(12),
-                        child: SvgPicture.asset("assets/images/Education.svg"),
+                  InkWell(
+                    onTap: () => showDialog(
+                      context: context,
+                      builder: (context) => BuyDialog(
+                        cost: 100,
+                        desc: "Education",
+                        image: "assets/images/Education.svg",
                       ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: radius12,
+                    ),
+                    child: Container(
+                      margin: EdgeInsets.all(24),
+                      height: 30,
+                      width: 30,
+                      child: Card(
+                        elevation: 3,
+                        child: Container(
+                          margin: EdgeInsets.all(12),
+                          child:
+                              SvgPicture.asset("assets/images/Education.svg"),
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: radius12,
+                        ),
                       ),
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.all(24),
-                    height: 30,
-                    width: 30,
-                    child: Card(
-                      elevation: 3,
-                      child: Container(
-                        margin: EdgeInsets.all(12),
-                        child: SvgPicture.asset("assets/images/Healthcare.svg"),
+                  InkWell(
+                    onTap: () => showDialog(
+                      context: context,
+                      builder: (context) => BuyDialog(
+                        cost: 120,
+                        desc: "Healthcare",
+                        image: "assets/images/Healthcare.svg",
                       ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: radius12,
+                    ),
+                    child: Container(
+                      margin: EdgeInsets.all(24),
+                      height: 30,
+                      width: 30,
+                      child: Card(
+                        elevation: 3,
+                        child: Container(
+                          margin: EdgeInsets.all(12),
+                          child:
+                              SvgPicture.asset("assets/images/Healthcare.svg"),
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: radius12,
+                        ),
                       ),
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.all(24),
-                    height: 30,
-                    width: 30,
-                    child: Card(
-                      elevation: 3,
-                      child: Container(
-                        margin: EdgeInsets.all(12),
-                        child: SvgPicture.asset("assets/images/Women.svg"),
+                  InkWell(
+                    onTap: () => showDialog(
+                      context: context,
+                      builder: (context) => BuyDialog(
+                        cost: 200,
+                        desc: "Women Empowerment",
+                        image: "assets/images/Women.svg",
                       ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: radius12,
+                    ),
+                    child: Container(
+                      margin: EdgeInsets.all(24),
+                      height: 30,
+                      width: 30,
+                      child: Card(
+                        elevation: 3,
+                        child: Container(
+                          margin: EdgeInsets.all(12),
+                          child: SvgPicture.asset("assets/images/Women.svg"),
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: radius12,
+                        ),
                       ),
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.all(24),
-                    height: 30,
-                    width: 30,
-                    child: Card(
-                      elevation: 3,
-                      child: Container(
-                        margin: EdgeInsets.all(12),
-                        child: SvgPicture.asset("assets/images/Blanket.svg"),
+                  InkWell(
+                    onTap: () => showDialog(
+                      context: context,
+                      builder: (context) => BuyDialog(
+                        cost: 100,
+                        desc: "Donate a Balnket",
+                        image: "assets/images/Blanket.svg",
                       ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: radius12,
+                    ),
+                    child: Container(
+                      margin: EdgeInsets.all(24),
+                      height: 30,
+                      width: 30,
+                      child: Card(
+                        elevation: 3,
+                        child: Container(
+                          margin: EdgeInsets.all(12),
+                          child: SvgPicture.asset("assets/images/Blanket.svg"),
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: radius12,
+                        ),
                       ),
                     ),
                   ),
