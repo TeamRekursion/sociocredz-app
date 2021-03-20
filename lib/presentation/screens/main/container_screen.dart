@@ -1,5 +1,6 @@
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:sociocredz/presentation/screens/main/profile_screen.dart';
 import 'package:sociocredz/presentation/themes/theme.dart';
 
 class ContainerScreen extends StatefulWidget {
@@ -10,10 +11,18 @@ class ContainerScreen extends StatefulWidget {
 class _ContainerScreenState extends State<ContainerScreen> {
   int _selectedIndex = 0;
 
+  final _screens = [
+    Container(),
+    Container(),
+    Container(),
+    ProfileScreen(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
+      body: _screens[_selectedIndex],
       bottomNavigationBar: Material(
         color: Colors.transparent,
         elevation: 70,
