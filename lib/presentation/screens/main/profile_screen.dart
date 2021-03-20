@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sociocredz/data/model/recent_trans_reponse.dart';
+import 'package:sociocredz/data/model/user_response.dart';
 import 'package:sociocredz/data/repos/profile_repo.dart';
 import 'package:sociocredz/presentation/animations/show_up.dart';
 import 'package:sociocredz/presentation/screens/main/all_trasactions_screen.dart';
@@ -20,11 +21,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final _box = GetStorage();
   final _repo = ProfileRepo();
   Future<RecentTransResponse> getRecentTrans;
+  Future<UserResponse> getUserDetails;
 
   @override
   void initState() {
     super.initState();
     getRecentTrans = _repo.getRecentTrans();
+    getUserDetails = _repo.getUserDetails();
   }
 
   @override
@@ -137,13 +140,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           Row(
                             children: [
-                              Text(
-                                "69.0",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 50,
-                                ),
+                              FutureBuilder<UserResponse>(
+                                future: getUserDetails,
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    return Text(
+                                      snapshot.data.data.credits.toString(),
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 50,
+                                      ),
+                                    );
+                                  } else if (snapshot.hasError) {
+                                    return Text("${snapshot.error}");
+                                  }
+                                  return Container(
+                                    margin: EdgeInsets.all(16),
+                                    child: CircularProgressIndicator(
+                                      valueColor:
+                                          AlwaysStoppedAnimation(Colors.white),
+                                    ),
+                                  );
+                                },
                               ),
                               SizedBox(width: 8),
                               SocioCredz(21),
@@ -190,24 +209,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         future: getRecentTrans,
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
-                            return ListView.builder(
-                              itemCount: 3,
-                              shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
-                              itemBuilder: (context, index) => Column(
-                                children: [
-                                  Transaction(
-                                    title: snapshot.data.data[index].name,
-                                    description: snapshot.data.data[index].desc,
-                                    isExpense:
-                                        !snapshot.data.data[index].positive,
-                                    amount: snapshot.data.data[index].amount,
-                                  ),
-                                  SizedBox(height: 4),
-                                  Divider(thickness: 1.5),
-                                ],
-                              ),
-                            );
+                            return (snapshot.data.data.isNotEmpty)
+                                ? ListView.builder(
+                                    itemCount: 3,
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemBuilder: (context, index) => Column(
+                                      children: [
+                                        Transaction(
+                                          title: snapshot.data.data[index].name,
+                                          description:
+                                              snapshot.data.data[index].desc,
+                                          isExpense: !snapshot
+                                              .data.data[index].positive,
+                                          amount:
+                                              snapshot.data.data[index].amount,
+                                        ),
+                                        SizedBox(height: 4),
+                                        Divider(thickness: 1.5),
+                                      ],
+                                    ),
+                                  )
+                                : Text("Nothing here yet!");
                           } else if (snapshot.hasError) {
                             return Text("${snapshot.error}");
                           }
