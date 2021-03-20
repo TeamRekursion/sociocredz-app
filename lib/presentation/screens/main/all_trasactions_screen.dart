@@ -10,6 +10,7 @@ class AllTransactionsScreen extends StatefulWidget {
 
 class _AllTransactionsScreenState extends State<AllTransactionsScreen> {
   bool _isCreditsExpanded = false;
+  bool _isExpenseExpanded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -106,14 +107,14 @@ class _AllTransactionsScreenState extends State<AllTransactionsScreen> {
                 child: ExpansionCard(
                   margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   trailing: Icon(
-                    (_isCreditsExpanded)
+                    (_isExpenseExpanded)
                         ? Icons.expand_less
                         : Icons.expand_more,
                     color: Colors.black,
                   ),
                   onExpansionChanged: (value) {
                     setState(() {
-                      _isCreditsExpanded = value;
+                      _isExpenseExpanded = value;
                     });
                   },
                   title: Row(
