@@ -1,5 +1,6 @@
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:sociocredz/presentation/screens/main/home_screen.dart';
 import 'package:sociocredz/presentation/screens/main/profile_screen.dart';
 import 'package:sociocredz/presentation/themes/theme.dart';
 
@@ -12,7 +13,7 @@ class _ContainerScreenState extends State<ContainerScreen> {
   int _selectedIndex = 0;
 
   final _screens = [
-    Container(),
+    HomeScreen(),
     Container(),
     Container(),
     ProfileScreen(),

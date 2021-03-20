@@ -20,6 +20,8 @@ dependencies:
   floating_bottom_navigation_bar: ^1.4.1
   flutter_svg: ^0.18.1
   expansion_card: ^0.1.0
+  carousel_slider: ^3.0.0
+  smooth_page_indicator: ^0.2.1
 
 dev_dependencies:
   flutter_test:
