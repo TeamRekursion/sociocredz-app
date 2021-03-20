@@ -40,9 +40,12 @@ class _StatsScreenState extends State<StatsScreen>
                     Container(
                       height: 60,
                       width: 60,
-                      decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: radius4,
+                      child: ClipRRect(
+                        child: Image.asset(
+                          "assets/images/avatar.png",
+                          fit: BoxFit.cover,
+                        ),
+                        borderRadius: radius12,
                       ),
                     ),
                     SizedBox(width: 10),
