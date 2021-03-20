@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sociocredz/presentation/animations/show_up.dart';
 import 'package:sociocredz/presentation/screens/main/container_screen.dart';
 import 'package:sociocredz/presentation/themes/theme.dart';
@@ -28,22 +29,26 @@ class AuthScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Expanded(
-                    flex: 1,
-                    child: Container(),
+                    flex: 3,
+                    child: Center(
+                      child: Container(
+                        child: SvgPicture.asset("assets/images/logo.svg"),
+                      ),
+                    ),
                   ),
                   Expanded(
-                    flex: 1,
+                    flex: 2,
                     child: Container(
                       width: double.maxFinite,
                       margin: EdgeInsets.symmetric(horizontal: 48),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             "Shop,\nEarn Points,\nDonate!",
-                            textAlign: TextAlign.end,
+                            textAlign: TextAlign.start,
                             style: TextStyle(
-                              fontSize: 28,
+                              fontSize: 32,
                               fontWeight: FontWeight.w700,
                               color: Colors.white,
                             ),
