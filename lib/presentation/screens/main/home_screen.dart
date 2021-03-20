@@ -2,6 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:sociocredz/data/model/campaign_response.dart';
+import 'package:sociocredz/data/repos/home_repo.dart';
 import 'package:sociocredz/presentation/animations/show_up.dart';
 import 'package:sociocredz/presentation/themes/theme.dart';
 import 'package:sociocredz/presentation/widgets/campaign_card.dart';
@@ -13,6 +15,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _adIndex = 0;
+  Future<CampaignResponse> getCampaigns;
+  HomeRepo _homeRepo = HomeRepo();
+
+  @override
+  void initState() {
+    super.initState();
+    getCampaigns = _homeRepo.getCampaigns();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,35 +93,45 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(top: 8),
-                child: CarouselSlider(
-                  options: CarouselOptions(
-                    viewportFraction: 0.8,
-                    enlargeCenterPage: true,
-                    height: 255,
-                  ),
-                  items: [
-                    CampaignCard(
-                      title: "NGO Anokha",
-                      tagline: "#foodforeveryone",
-                      pledgedGoal: 97000,
-                      raisedCredits: 69420,
-                    ),
-                    CampaignCard(
-                      title: "NGO Udaan",
-                      tagline: "#clothes",
-                      pledgedGoal: 10000,
-                      raisedCredits: 3322,
-                    ),
-                    CampaignCard(
-                      title: "NGO Awaaz",
-                      tagline: "#cleanwater",
-                      pledgedGoal: 16000,
-                      raisedCredits: 15300,
-                    ),
-                  ],
-                ),
+              FutureBuilder<CampaignResponse>(
+                future: getCampaigns,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Container(
+                      margin: EdgeInsets.only(top: 8),
+                      child: CarouselSlider(
+                        options: CarouselOptions(
+                          viewportFraction: 0.8,
+                          enlargeCenterPage: true,
+                          height: 255,
+                        ),
+                        items: [
+                          CampaignCard(
+                            title: "NGO Anokha",
+                            tagline: "#foodforeveryone",
+                            pledgedGoal: 97000,
+                            raisedCredits: 69420,
+                          ),
+                          CampaignCard(
+                            title: "NGO Udaan",
+                            tagline: "#clothes",
+                            pledgedGoal: 10000,
+                            raisedCredits: 3322,
+                          ),
+                          CampaignCard(
+                            title: "NGO Awaaz",
+                            tagline: "#cleanwater",
+                            pledgedGoal: 16000,
+                            raisedCredits: 15300,
+                          ),
+                        ],
+                      ),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Text("${snapshot.error}");
+                  }
+                  return CircularProgressIndicator();
+                },
               ),
               SizedBox(height: 16),
               Container(
