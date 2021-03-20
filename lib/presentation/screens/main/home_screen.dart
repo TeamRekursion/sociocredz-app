@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:sociocredz/presentation/animations/show_up.dart';
 import 'package:sociocredz/presentation/themes/theme.dart';
@@ -112,6 +113,117 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
+              SizedBox(height: 16),
+              Container(
+                alignment: Alignment.centerLeft,
+                margin: EdgeInsets.all(16),
+                child: Text(
+                  "Our Services",
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              GridView.count(
+                crossAxisCount: 3,
+                shrinkWrap: true,
+                padding: EdgeInsets.symmetric(horizontal: 24),
+                physics: NeverScrollableScrollPhysics(),
+                children: [
+                  Container(
+                    margin: EdgeInsets.all(24),
+                    height: 30,
+                    width: 30,
+                    child: Card(
+                      elevation: 3,
+                      child: Container(
+                        margin: EdgeInsets.all(12),
+                        child: SvgPicture.asset("assets/images/PlantTree.svg"),
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: radius12,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(24),
+                    height: 30,
+                    width: 30,
+                    child: Card(
+                      elevation: 3,
+                      child: Container(
+                        margin: EdgeInsets.all(12),
+                        child: SvgPicture.asset("assets/images/BuyMeal.svg"),
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: radius12,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(24),
+                    height: 30,
+                    width: 30,
+                    child: Card(
+                      elevation: 3,
+                      child: Container(
+                        margin: EdgeInsets.all(12),
+                        child: SvgPicture.asset("assets/images/Education.svg"),
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: radius12,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(24),
+                    height: 30,
+                    width: 30,
+                    child: Card(
+                      elevation: 3,
+                      child: Container(
+                        margin: EdgeInsets.all(12),
+                        child: SvgPicture.asset("assets/images/Healthcare.svg"),
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: radius12,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(24),
+                    height: 30,
+                    width: 30,
+                    child: Card(
+                      elevation: 3,
+                      child: Container(
+                        margin: EdgeInsets.all(12),
+                        child: SvgPicture.asset("assets/images/Women.svg"),
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: radius12,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(24),
+                    height: 30,
+                    width: 30,
+                    child: Card(
+                      elevation: 3,
+                      child: Container(
+                        margin: EdgeInsets.all(12),
+                        child: SvgPicture.asset("assets/images/Blanket.svg"),
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: radius12,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 24),
             ],
           ),
         ),
