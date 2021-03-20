@@ -1,10 +1,60 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sociocredz/presentation/animations/show_up.dart';
 import 'package:sociocredz/presentation/screens/main/container_screen.dart';
 import 'package:sociocredz/presentation/themes/theme.dart';
 
-class AuthScreen extends StatelessWidget {
+class AuthScreen extends StatefulWidget {
+  @override
+  _AuthScreenState createState() => _AuthScreenState();
+}
+
+class _AuthScreenState extends State<AuthScreen> {
+  bool _isLoading = false;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+  Future<void> _signInWithGoogle(BuildContext context) async {
+    try {
+      setState(() {
+        _isLoading = true;
+      });
+      final GoogleSignInAccount googleSignInAccount =
+          await _googleSignIn.signIn();
+      final GoogleSignInAuthentication googleSignInAuthentication =
+          await googleSignInAccount.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken,
+      );
+
+      final UserCredential authResult =
+          await _auth.signInWithCredential(credential);
+      final User user = authResult.user;
+
+      if (user != null) {
+        final User currentUser = _auth.currentUser;
+        print(currentUser.email);
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => ContainerScreen(),
+          ),
+          (route) => false,
+        );
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    } catch (err) {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,41 +104,38 @@ class AuthScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 56),
-                          MaterialButton(
-                            height: 55,
-                            minWidth: double.maxFinite,
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ContainerScreen(),
-                                ),
-                              );
-                            },
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(35),
-                            ),
-                            color: purple,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  height: 20,
-                                  child:
-                                      Image.asset("assets/images/g_logo.png"),
-                                ),
-                                SizedBox(width: 16),
-                                Text(
-                                  "Login with Google",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white,
+                          (_isLoading)
+                              ? LinearProgressIndicator()
+                              : MaterialButton(
+                                  height: 55,
+                                  minWidth: double.maxFinite,
+                                  onPressed: () async {
+                                    await _signInWithGoogle(context);
+                                  },
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(35),
+                                  ),
+                                  color: purple,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        height: 20,
+                                        child: Image.asset(
+                                            "assets/images/g_logo.png"),
+                                      ),
+                                      SizedBox(width: 16),
+                                      Text(
+                                        "Login with Google",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
                         ],
                       ),
                     ),
