@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:sociocredz/data/model/recent_trans_reponse.dart';
+import 'package:sociocredz/data/repos/profile_repo.dart';
 import 'package:sociocredz/presentation/animations/show_up.dart';
 import 'package:sociocredz/presentation/screens/main/all_trasactions_screen.dart';
 import 'package:sociocredz/presentation/screens/main/qr_screen.dart';
@@ -16,6 +18,14 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final _box = GetStorage();
+  final _repo = ProfileRepo();
+  Future<RecentTransResponse> getRecentTrans;
+
+  @override
+  void initState() {
+    super.initState();
+    getRecentTrans = _repo.getRecentTrans();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -176,22 +186,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ],
                       ),
                       SizedBox(height: 32),
-                      ListView.builder(
-                        itemCount: 3,
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, index) => Column(
-                          children: [
-                            Transaction(
-                              title: "CK Store",
-                              description: "City Centre Mall",
-                              isExpense: false,
-                              amount: 200,
-                            ),
-                            SizedBox(height: 4),
-                            Divider(thickness: 1.5),
-                          ],
-                        ),
+                      FutureBuilder<RecentTransResponse>(
+                        future: getRecentTrans,
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            return ListView.builder(
+                              itemCount: 3,
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemBuilder: (context, index) => Column(
+                                children: [
+                                  Transaction(
+                                    title: snapshot.data.data[index].name,
+                                    description: snapshot.data.data[index].desc,
+                                    isExpense:
+                                        !snapshot.data.data[index].positive,
+                                    amount: snapshot.data.data[index].amount,
+                                  ),
+                                  SizedBox(height: 4),
+                                  Divider(thickness: 1.5),
+                                ],
+                              ),
+                            );
+                          } else if (snapshot.hasError) {
+                            return Text("${snapshot.error}");
+                          }
+                          return Center(child: CircularProgressIndicator());
+                        },
                       ),
                       SizedBox(height: 32),
                       Container(
