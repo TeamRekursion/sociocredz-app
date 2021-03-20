@@ -29,4 +29,29 @@ class HomeRepo {
       throw Exception("Something went wrong");
     }
   }
+
+  Future<bool> donate(int amount, String description) async {
+    final url = baseUrl + "user/donate";
+    try {
+      var response = await http.post(
+        url,
+        headers: {
+          HttpHeaders.contentTypeHeader: "application/json",
+          "Authorization": "Bearer ${_box.read('userToken')}",
+        },
+        body: jsonEncode({
+          "amount": amount,
+          "description": description,
+        }),
+      );
+      print(response.body);
+      if (response.statusCode == 201) {
+        return true;
+      } else {
+        throw Exception("Something went wrong");
+      }
+    } catch (e) {
+      throw Exception("Something went wrong");
+    }
+  }
 }
