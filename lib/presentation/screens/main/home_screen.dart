@@ -46,34 +46,36 @@ class _HomeScreenState extends State<HomeScreen> {
                       });
                     },
                   ),
-                  items: [1, 2, 3, 4, 5].map((i) {
-                    return Builder(
-                      builder: (BuildContext context) {
-                        return Container(
-                          width: MediaQuery.of(context).size.width,
-                          margin: EdgeInsets.symmetric(horizontal: 16.0),
-                          decoration: BoxDecoration(color: purple),
-                          child: Center(
-                            child: Text(
-                              'ADvert',
-                              style: TextStyle(
-                                fontSize: 24.0,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    );
-                  }).toList(),
+                  items: [
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      margin: EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Image.asset(
+                        "assets/images/ad1.png",
+                      ),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      margin: EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Image.asset(
+                        "assets/images/ad2.png",
+                      ),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      margin: EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Image.asset(
+                        "assets/images/ad3.png",
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Container(
                 margin: EdgeInsets.all(12),
                 child: AnimatedSmoothIndicator(
                   activeIndex: _adIndex,
-                  count: 5,
+                  count: 3,
                   effect: WormEffect(
                     activeDotColor: red,
                     dotColor: grey,
