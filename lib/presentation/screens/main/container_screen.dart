@@ -2,6 +2,7 @@ import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.da
 import 'package:flutter/material.dart';
 import 'package:sociocredz/presentation/screens/main/home_screen.dart';
 import 'package:sociocredz/presentation/screens/main/profile_screen.dart';
+import 'package:sociocredz/presentation/screens/main/stats_screen.dart';
 import 'package:sociocredz/presentation/themes/theme.dart';
 
 class ContainerScreen extends StatefulWidget {
@@ -15,7 +16,7 @@ class _ContainerScreenState extends State<ContainerScreen> {
   final _screens = [
     HomeScreen(),
     Container(),
-    Container(),
+    StatsScreen(),
     ProfileScreen(),
   ];
 
