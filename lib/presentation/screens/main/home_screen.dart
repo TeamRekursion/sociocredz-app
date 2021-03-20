@@ -88,6 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   options: CarouselOptions(
                     viewportFraction: 0.8,
                     enlargeCenterPage: true,
+                    height: 255,
                   ),
                   items: [
                     CampaignCard(

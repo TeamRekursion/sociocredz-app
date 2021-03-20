@@ -31,23 +31,29 @@ class CampaignCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    Text(
-                      "$title | ",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Row(
+                    children: [
+                      Text(
+                        "$title | ",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    Text(
-                      tagline,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: purple,
+                      Expanded(
+                        child: Text(
+                          tagline,
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: purple,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.fade,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 Icon(Icons.info, color: orange, size: 20),
               ],

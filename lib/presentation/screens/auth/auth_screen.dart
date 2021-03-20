@@ -29,7 +29,7 @@ class AuthScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Expanded(
-                    flex: 3,
+                    flex: 1,
                     child: Center(
                       child: Container(
                         child: SvgPicture.asset("assets/images/logo.svg"),
@@ -37,7 +37,7 @@ class AuthScreen extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    flex: 2,
+                    flex: 1,
                     child: Container(
                       width: double.maxFinite,
                       margin: EdgeInsets.symmetric(horizontal: 48),
