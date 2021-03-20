@@ -3,10 +3,9 @@ import 'package:sociocredz/presentation/widgets/sociocredz.dart';
 
 class Recent extends StatelessWidget {
   final String title;
-  final String description;
   final int amount;
 
-  Recent({this.title, this.description, this.amount});
+  Recent({this.title, this.amount});
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +14,6 @@ class Recent extends StatelessWidget {
         title: Text(
           title,
           style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
-        ),
-        subtitle: Text(
-          description,
-          style: TextStyle(fontSize: 14),
         ),
         trailing: Column(
           mainAxisAlignment: MainAxisAlignment.center,

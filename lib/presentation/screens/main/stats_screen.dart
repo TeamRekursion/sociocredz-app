@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:sociocredz/data/model/leaderboard_response.dart';
+import 'package:sociocredz/data/repos/stats_repo.dart';
 import 'package:sociocredz/presentation/animations/show_up.dart';
 import 'package:sociocredz/presentation/themes/theme.dart';
 import 'package:sociocredz/presentation/widgets/donation.dart';
@@ -16,11 +18,14 @@ class _StatsScreenState extends State<StatsScreen>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
   int _selectedTabbar = 0;
+  Future getLeaderboard;
+  final _repo = StatsRepo();
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
+    getLeaderboard = _repo.getLeaderboard();
   }
 
   @override
@@ -200,98 +205,123 @@ class _StatsScreenState extends State<StatsScreen>
                 ),
               ),
               SizedBox(height: 24),
-              Card(
-                margin: EdgeInsets.symmetric(horizontal: 16),
-                elevation: 4,
-                shape: RoundedRectangleBorder(
-                  borderRadius: radius12,
-                ),
-                child: Container(
-                  margin: EdgeInsets.all(24),
-                  color: Colors.white,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: double.maxFinite,
-                        child: TabBar(
-                          controller: _tabController,
-                          tabs: [
-                            Tab(text: "Most Dontaions"),
-                            Tab(text: "Most Recent"),
+              FutureBuilder<LeaderboardResponse>(
+                future: getLeaderboard,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Card(
+                      margin: EdgeInsets.symmetric(horizontal: 16),
+                      elevation: 4,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: radius12,
+                      ),
+                      child: Container(
+                        margin: EdgeInsets.all(24),
+                        color: Colors.white,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: double.maxFinite,
+                              child: TabBar(
+                                controller: _tabController,
+                                tabs: [
+                                  Tab(text: "Most Dontaions"),
+                                  Tab(text: "Most Recent"),
+                                ],
+                                onTap: (value) {
+                                  setState(() {
+                                    _selectedTabbar = value;
+                                  });
+                                },
+                                labelColor: orange,
+                                indicatorColor: Colors.white,
+                                labelStyle: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                unselectedLabelColor: grey,
+                                unselectedLabelStyle: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 32),
+                            Builder(
+                              builder: (_) {
+                                if (_selectedTabbar == 0) {
+                                  return Column(
+                                    children: [
+                                      Donation(
+                                        title: snapshot.data.mostDonations[0]
+                                            .user.userName,
+                                        description: "Trees are best!",
+                                        amount: snapshot
+                                            .data.mostDonations[0].amount,
+                                        imagePath: "assets/images/1st.svg",
+                                      ),
+                                      SizedBox(height: 4),
+                                      Divider(thickness: 1.5),
+                                      Donation(
+                                        title: snapshot.data.mostDonations[1]
+                                            .user.userName,
+                                        description: "I plant trees!",
+                                        amount: snapshot
+                                            .data.mostDonations[1].amount,
+                                        imagePath: "assets/images/2nd.svg",
+                                      ),
+                                      SizedBox(height: 4),
+                                      Divider(thickness: 1.5),
+                                      Donation(
+                                        title: "Nirmit Jatana",
+                                        description: "Books are love.",
+                                        amount: 3200,
+                                        imagePath: "assets/images/3rd.svg",
+                                      ),
+                                      SizedBox(height: 4),
+                                      Divider(thickness: 1.5),
+                                    ],
+                                  );
+                                } else {
+                                  return ListView.builder(
+                                    itemCount: 2,
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemBuilder: (context, index) => Column(
+                                      children: [
+                                        Recent(
+                                          title: snapshot
+                                              .data
+                                              .recentDonations[index]
+                                              .user
+                                              .userName,
+                                          amount: snapshot.data
+                                              .recentDonations[index].amount,
+                                        ),
+                                        SizedBox(height: 4),
+                                        Divider(thickness: 1.5),
+                                      ],
+                                    ),
+                                  );
+                                }
+                              },
+                            ),
+                            SizedBox(height: 24),
                           ],
-                          onTap: (value) {
-                            setState(() {
-                              _selectedTabbar = value;
-                            });
-                          },
-                          labelColor: orange,
-                          indicatorColor: Colors.white,
-                          labelStyle: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                          unselectedLabelColor: grey,
-                          unselectedLabelStyle: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
                         ),
                       ),
-                      SizedBox(height: 32),
-                      Builder(
-                        builder: (_) {
-                          if (_selectedTabbar == 0) {
-                            return Column(
-                              children: [
-                                Donation(
-                                  title: "Mayank",
-                                  description: "Trees are best!",
-                                  amount: 80400,
-                                  imagePath: "assets/images/1st.svg",
-                                ),
-                                SizedBox(height: 4),
-                                Divider(thickness: 1.5),
-                                Donation(
-                                  title: "Chanakya",
-                                  description: "I plant trees!",
-                                  amount: 65321,
-                                  imagePath: "assets/images/2nd.svg",
-                                ),
-                                SizedBox(height: 4),
-                                Divider(thickness: 1.5),
-                                Donation(
-                                  title: "Aryan",
-                                  description: "Books are love.",
-                                  amount: 45000,
-                                  imagePath: "assets/images/3rd.svg",
-                                ),
-                                SizedBox(height: 4),
-                                Divider(thickness: 1.5),
-                              ],
-                            );
-                          } else {
-                            return ListView.builder(
-                              itemCount: 3,
-                              shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
-                              itemBuilder: (context, index) => Column(
-                                children: [
-                                  Recent(
-                                    title: "Rithik Jain",
-                                    description: "I plant trees!",
-                                    amount: 600,
-                                  ),
-                                  SizedBox(height: 4),
-                                  Divider(thickness: 1.5),
-                                ],
-                              ),
-                            );
-                          }
-                        },
-                      ),
-                      SizedBox(height: 24),
-                    ],
-                  ),
-                ),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: Text("${snapshot.error}"),
+                    );
+                  }
+                  return Container(
+                    margin: EdgeInsets.only(top: 48),
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                },
               ),
               SizedBox(height: 32),
             ],
