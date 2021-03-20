@@ -14,7 +14,7 @@ final pageTransition = PageTransitionsTheme(
 );
 
 final ThemeData lightTheme = ThemeData(
-  fontFamily: 'Rubik',
+  fontFamily: 'Poppins',
   accentColor: red,
   primaryColor: purple,
   primaryColorDark: purple,
