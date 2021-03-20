@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:sociocredz/presentation/animations/show_up.dart';
 import 'package:sociocredz/presentation/screens/main/all_trasactions_screen.dart';
 import 'package:sociocredz/presentation/screens/main/qr_screen.dart';
@@ -13,6 +15,8 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  final _box = GetStorage();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -30,9 +34,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Container(
                       height: 60,
                       width: 60,
-                      decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: radius4,
+                      child: ClipRRect(
+                        child: CachedNetworkImage(
+                          imageUrl: _box.read('userImage'),
+                          fit: BoxFit.cover,
+                        ),
+                        borderRadius: radius12,
                       ),
                     ),
                     SizedBox(width: 10),
@@ -49,7 +56,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           ),
                           Text(
-                            "Rithik Jain",
+                            _box.read('userName'),
                             style: TextStyle(
                               fontSize: 26,
                               fontWeight: FontWeight.bold,

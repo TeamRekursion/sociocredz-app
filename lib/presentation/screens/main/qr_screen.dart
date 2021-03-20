@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:sociocredz/presentation/animations/show_up.dart';
 import 'package:sociocredz/presentation/themes/theme.dart';
 
 class QRScreen extends StatelessWidget {
+  final _box = GetStorage();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,12 +45,12 @@ class QRScreen extends StatelessWidget {
               child: Column(
                 children: [
                   QrImage(
-                    data: "1234567890",
+                    data: _box.read('userID'),
                     version: QrVersions.auto,
                   ),
                   SizedBox(height: 16),
                   Text(
-                    "Rithik Jain",
+                    _box.read('userName'),
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,

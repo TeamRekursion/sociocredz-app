@@ -46,6 +46,7 @@ class _AuthScreenState extends State<AuthScreen> {
           _box.write('isLoggedIn', true);
           _box.write('userName', response.data.userName);
           _box.write('userImage', response.data.userProfileUrl);
+          _box.write('userID', response.data.userId);
           _box.write('userToken', response.jwt);
           Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
